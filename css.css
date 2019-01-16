@@ -1,0 +1,31 @@
+body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            background-color: black;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .flex-container>div.text {
+            margin: 10px;
+            padding: 20px;
+            font-size: 19px;
+            width: 32.5em;
+        }
+
+        pre {
+            width: 48.6em;
+            overflow: auto;
+            font-size: 13px;
+        }
+
+        a {
+            color: white;
+        }
+
+        a:hover {
+            color: gray;
+        }
