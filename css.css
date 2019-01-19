@@ -43,3 +43,7 @@ body {
         a:hover {
             color: gray;
         }
+
+        code {
+            white-space: pre-line;
+        }
