@@ -6,7 +6,9 @@ body {
 
         .flex-container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            /*justify-content: center;*/
         }
 
         .flex-container>div.text {
@@ -16,7 +18,7 @@ body {
             width: 32.5em;
         }
 
-        pre {
+        .flex-container>pre {
             width: 49em;
             overflow: auto;
             font-size: 12.3px;
