@@ -17,12 +17,12 @@ body {
         }
 
         pre {
-            width: 48.6em;
+            width: 49em;
             overflow: auto;
-            font-size: 13px;
+            font-size: 12.3px;
         }
 
-        @media only screen and (max-width: 1200px) {
+        @media only screen and (width: 1200px) {
             .flex-container>div.text {
                 font-size: 40px;
                 }
