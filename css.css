@@ -12,7 +12,7 @@ body {
         .flex-container>div.text {
             margin: 10px;
             padding: 20px;
-            /*font-size: 19px;*/
+            font-size: 19px;
             width: 32.5em;
         }
 
@@ -21,6 +21,12 @@ body {
             overflow: auto;
             font-size: 13px;
         }
+
+        @media only screen and (width: 600px) {
+            .flex-container>div.text {
+                font-size: 30px;
+                }
+            }
 
         a {
             color: white;
