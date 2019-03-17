@@ -16,51 +16,130 @@
 <body>
 
     <div class="flex-container">
-        <h1>Article about stuff</h1>
+        <h1>Logging and plotting GPS data</h1>
 
         <div class="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed diam at ligula viverra accumsan. Praesent finibus est at risus convallis, vel finibus justo ultricies. Integer quis nulla quis nisi efficitur condimentum. Sed tristique mollis mauris ac elementum. Sed condimentum nunc et risus volutpat, eget suscipit tellus pellentesque. Morbi dictum hendrerit dignissim. Nulla interdum volutpat sem rutrum placerat. Fusce at tellus iaculis nibh malesuada tincidunt. Morbi justo est, placerat ut viverra nec, molestie vulputate ex. Proin sit amet tempus orci. Proin elementum dui ut erat blandit, ut viverra lectus finibus.
+            If you have an Android phone, Google may be tracking your every move through a service called Google Timeline. At the beginning of 2017 I turned this service off because it felt a bit creepy and I didn't see any benefits (incidentally withdrawing permission doesn't delete your old Timeline data).
         </div>
 
-        <div class="text">Some other fonts: Ir black / monokai sublime / Lightfair</div>
+        <div class="text">
+            Recently I had a change of heart and saw how interesting historical location data can be. Particularly for journalling things like old holidays. I wanted to try it again. But this time maintaining more control over the data. I wanted to:
+        </div>
+
+        <div class="text">
+            <ul>
+                <li>log my location passively and continually</li>
+                <li>have immediate access to the data</li>
+                <li>only use my smartphone</li>
+            </ul>   
+        </div>
+
+        <h2>Logging GPS data</h2>
+
+        <div class="text">
+            After reading <a href="https://bit-insomnia.de/en/2015/03/27/private-location-history-without-google-facebook-co/">this article</a> by bitinsomnia <a href="https://gpslogger.app/">GPSLogger for Android</a> seemed like a good choice for these reasons:
+        </div>
+
+        <div class="text">
+            <ul>
+                <li>continual logging to a range of formats including CSV</li>
+                <li>automatic upload to cloud storage such as DropBox</li>
+                <li>battery efficient</li>
+            </ul>   
+        </div>
+
+        <img src="../assets/gps-logger-android-icon.png">
+
+        <div class="text">
+           I was impressed with how easy the app was to setup. After installing on my Android smartphone, I selected the following options (all other options were left on default):
+        </div>
+
+        <div class="text">
+            <ul>
+                <li>log to CSV</li>
+                <li>log position every second</li>
+                <li>allow auto sending</li>
+                <li>send log files every minute</li>
+                <li>send on WiFi only</li>
+                <li>autosend to DropBox</li>
+            </ul>   
+        </div>
+
+        <div class="text">
+            I then hit the START LOGGING button in the app and took a walk. On my return I had a CSV file on DropBox with over a thousand rows - simple as that!
+        </div>
+
+        <h2>Plotting GPS data</h2>
+
+        <div class="text">
+            A portion of the route is plotted here using the R package <a href="https://journal.r-project.org/archive/2013-1/kahle-wickham.pdf">ggmap</a>:
+        </div>
 
         <pre>
             <code class="r">
                 library(ggmap)
                 gps_df <- read_csv("Dropbox/Apps/GPSLogger for Android/20180526.csv")
-                # 80 character row limit ------------------------------------------------------
                 # Some data points have been removed
                 qmplot(lon, lat, data = gps_df, maptype = "watercolor")
             </code>
         </pre>
 
-        <div class="text">
-            Cras tincidunt nisl orci, sit amet accumsan nisi sagittis vitae. Morbi convallis ut augue ac posuere. Maecenas nec tincidunt risus. Praesent id metus vitae nibh mattis tempor ac sit amet tellus. Duis at tortor tempus, dignissim nisl at, dapibus enim. Sed quis commodo nulla, consequat commodo nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        <img src="../assets/gps-logger-path-01.png">
 
-            Mauris euismod orci eu massa imperdiet, sit amet faucibus risus consectetur. Cras vulputate velit commodo lectus ornare consequat. Nulla facilisi. Suspendisse ullamcorper sodales egestas. Etiam tristique venenatis nisl et consequat. Aenean congue velit non nulla consectetur laoreet. Vivamus eu porttitor leo, eget euismod elit. Vestibulum sit amet elit nec erat eleifend iaculis. Ut at maximus nunc.
+        <div class="text">
+           The ggmap package exposes various online mapping services like Google Maps and OpenStreetMap. Here I used the watercolor Stamen Map simply because I like how they look. As you can see, there are some issues with the data:
         </div>
 
         <div class="text">
-            <span style="font-weight: bold">
-                19 Jan 2019
-            </span>
-            <span style="display:inline-block; width: 20px"></span>
-            <a href="https://www.google.com">
-                Try searching something here
-            </a>
+            <ul>
+                <li>there are large errors in the path</li>
+                <li>given the accuracy, the app is over-collecting (even when the path is relatively smooth)</li>
+                <li>the app is collecting data while stationary inside buildings (wasting battery and adding errors)</li>
+            </ul>   
+        </div>
+
+        <h2>Tweaking GPSLogger</h2>
+
+        <div class="text">
+           To solve these issues I made the following changes to the options in GPSLogger for Android:
         </div>
 
         <div class="text">
-            <span style="font-weight: bold">
-                27 May 2018
-            </span>
-            <span style="display:inline-block; width: 20px"></span>
-            <a href="/article/2018-05-27-gps-logging.html">
-                GPS Logging
-            </a>
+            <ul>
+                <li>change location providers to GPS only for better (although slower) location fixes</li>
+                <li>change the distance filter from 0 to 10 metres to help avoid errors accumulating</li>
+                <li>change the accuracy filter from 40 to 10 metres so data points are accurate to within 10 metres</li>
+                <li>change the logging interval to 20 seconds</li>
+            </ul>   
         </div>
-    </div>
+
+        <div class="text">
+            Here's the result from the second walk:
+        </div>
+
+        <img src="../assets/gps-logger-path-02.png">
+
+        <div class="text">
+           Pretty good! As expected, some small errors persist. But I'm happy with the overall accuracy and the rate at which data points are being logged. The app has been running continuously for a week now; the whole setup is automated, without noticable drain on battery.
+        </div>
+
+        <h2>Taking it further</h2>
+
+         <div class="text">
+           I'm collecting this data with some kind of journal in mind. That might involve plotting single days like above. Or creating interactive visualisations for multiple days - perhaps something like <a href="https://www.google.co.uk/maps/timeline">Google Timeline</a>.
+        </div>
+
+        <div class="text">
+           Another avenue would be to synthesise higher concepts from the data - such as journeys and stays. A stay could be defined as a location I have stayed at for longer than an hour, and a journey could be defined as the set of coordinates between stays.
+        </div>
+
+        <div class="text">
+           I'm sure there are plenty more approaches to explore; including machine learning. In the meantime I'll continue logging my location in this way.
+        </div>
+
+        <a href="/www/index.html">Home</a>
         
+    </div>
 
 </body>
 
