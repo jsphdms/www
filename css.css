@@ -1,49 +1,49 @@
 body {
-            font-family: Arial, Helvetica, sans-serif;
-            color: white;
-            background-color: #00001a;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: #00001a;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-container>div.text {
+    margin: 10px;
+    padding: 20px;
+    font-size: 19px;
+    width: 32.5em;
+}
+
+.flex-container>pre {
+    width: 49em;
+    overflow: auto;
+    font-size: 12.3px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .flex-container>div.text {
+        font-size: 40px;
+        max-width: 95%;
         }
 
-        .flex-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+    pre {
+        font-size: 18px;
         }
+    }
 
-        .flex-container>div.text {
-            margin: 10px;
-            padding: 20px;
-            font-size: 19px;
-            width: 32.5em;
-        }
+    
 
-        .flex-container>pre {
-            width: 49em;
-            overflow: auto;
-            font-size: 12.3px;
-        }
+a {
+    color: white;
+}
 
-        @media only screen and (max-width: 1000px) {
-            .flex-container>div.text {
-                font-size: 40px;
-                max-width: 95%;
-                }
+a:hover {
+    color: gray;
+}
 
-            pre {
-                font-size: 18px;
-                }
-            }
-
-            
-
-        a {
-            color: white;
-        }
-
-        a:hover {
-            color: gray;
-        }
-
-        code {
-            white-space: pre-line;
-        }
+code {
+    white-space: pre-line;
+}

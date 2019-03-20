@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../css.css">
+    <script type="text/javascript" src="../hljs/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <link rel="stylesheet" type="text/css" href="../hljs/styles/lightfair.css">
+    <title>Page Title</title>
+    
+</head>
+
+
+<body>
+
+    <div class="flex-container">
+        <h1>Creating an R package</h1>
+
+        <div class="text">
+            I started writing R packages in early 2017. For a while I found the initial set up for a new package involved more guess-work than I'd like (e.g. start from GitHub first or RStudio? When do you normally add a license?).
+        </div>
+
+        <div class="text">
+            Here's my personal checklist for getting a minimal R package started in a consistent way:
+        </div>
+
+
+        
+        <div class="text">
+            <ol>
+                <li>Create an empty GitHub repo (with a license)</li>
+                <li>Create a new project in RStudio (tick the box to create a git repo)</li>
+                <li><code>git rm</code> the default hello world function</li>
+                <li><a href="https://help.github.com/en/articles/adding-a-remote">Add a git remote</a></li>
+                <li><a href="https://happygitwithr.com/credential-caching.html">Cache git credentials</a></li>
+                <li><a href="https://happygitwithr.com/hello-git.html">Add username and email to git</a></li>
+                <li><code>stage</code>, <code>commit</code>, and <code>push</code> (may need a personal access token if GitHub is set up with 2FA)</li>
+            </ol>
+        </div>
+
+        <div class="text">
+            This checklist reflects how I currently work. So it'll most likely change as my workflow evolves.
+        </div>
+
+        <h2>...Bonus Checklist</h2>
+
+        <div class="text">
+            Some extras to make life easier for others (including future self):
+        </div>
+        <div class="text">
+            <ol>
+                <li>Update the <a href="http://r-pkgs.had.co.nz/description.html">DESCRIPTION file</a></li>
+                <li>Add some basic documention:
+                    <ul>
+                        <li>Create a README with <code>usethis::use_readme_rmd()</code></li>
+                        <li>Add a <a href="https://www.repostatus.org/">status badge</a></li>
+                        <li>Add a URL to the GitHub repo webpage</li>
+                    </ul>
+                </li>
+                <li>Maybe <a href="https://juliasilge.com/blog/beginners-guide-to-travis/">set up CI</a> and a <a href="https://pkgdown.r-lib.org/">pkgdown site</a> for larger projects</li>
+            </ol>
+        </div>
+
+        <div class="text">
+            <a href="https://ropensci.github.io/dev_guide/">This book</a> is an excellent resource for taking best practice further.
+        </div>
+
+        <div class="text">
+            <center><a href="/www/index.html">Home</a></center>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>
